@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, Dimensions, View, TouchableOpacity } from "react-native";
+import {
+  Text,
+  Dimensions,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
 import {
   CircleButton,
   CustomText,
@@ -11,9 +18,31 @@ import {
 } from "../components";
 import { Background } from "../boilerplate";
 import { assets, COLORS, SIZES } from "../constants";
+import { useSelector, useDispatch } from "react-redux";
+import { addSubject } from "../redux/subject-slice/SubjectSlice";
+import { useEffect } from "react";
+
+// import { SafeAreaView } from "react-native-safe-area-context";
 
 export function Home() {
-  //   const windowWidth = Dimensions.get("window");
+  const subjects = useSelector((state) => state.subject.value);
+  const dispatch = useDispatch();
+
+  const fetchSubjects = async () => {
+    await fetch("http://172.23.0.1:3000/subjects")
+      .then((response) => response.json())
+      .then((subjects) =>
+        subjects.map((subject) => dispatch(addSubject(subject)))
+      )
+      .catch((err) => console.log("There has been an error" + err.message));
+  };
+
+  useEffect(() => {
+    fetchSubjects();
+  }, []);
+
+  console.log(typeof subjects);
+
   return (
     <Background>
       <CircleButton imgUrl={assets.heart} right={10} top={10}></CircleButton>
@@ -72,10 +101,19 @@ export function Home() {
         Recent Quiz
       </Text>
       <View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
-        <QuizDisplay></QuizDisplay>
-        <QuizDisplay></QuizDisplay>
+        {subjects.map((subject) => (
+          <QuizDisplay
+            imgUrl={assets.heart}
+            key={Math.random()}
+            subject={subject}
+          >
+            {subject.subjectName}
+          </QuizDisplay>
+        ))}
+        {/* <QuizDisplay imgUrl={assets.heart}>Sport</QuizDisplay> */}
       </View>
       <SubmitButton text={"Continue"} marginTop={20}></SubmitButton>
     </Background>
+    // </SafeAreaView>
   );
 }

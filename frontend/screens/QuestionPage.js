@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Text, Dimensions, View, TouchableOpacity, Image } from "react-native";
 import {
   CircleButton,
@@ -13,9 +14,24 @@ import {
 } from "../components";
 import { Background } from "../boilerplate";
 import { assets, COLORS, SIZES } from "../constants";
+import { addQuestion } from "../redux/qustion-slice/QuestionSlice";
+import { useNavigation } from "@react-navigation/native";
 
-export function QuestionPage() {
-  //   const windowWidth = Dimensions.get("window");
+export function QuestionPage({ question }) {
+  const navigation = useNavigation();
+  const score = useSelector((state) => state.score.value);
+  const dispatch = useDispatch();
+
+  var containOptions = false;
+  const onPressHandler = () => {
+    console.log(score);
+    navigation.navigate("Result", { score: score });
+  };
+
+  if (question.options != null) {
+    containOptions = true;
+  }
+
   return (
     <Background>
       {/* <CircleButton imgUrl={assets.heart} right={10} top={10}></CircleButton> */}
@@ -24,66 +40,30 @@ export function QuestionPage() {
         color={COLORS.gray}
         fontSize={SIZES.medium}
         // textAlign={"center"}
-        marginTop={50}
+        marginTop={0}
         marginBottom={0}
         paddingBottom={0}
         paddingTop={30}
         marginLeft={15}
       >
-        Question 1
+        {question.question}
       </CustomText>
-      <CustomText
-        color={COLORS.white}
-        fontSize={20}
-        margin={15}
-        marginTop={0}
-        paddingTop={0}
-      >
-        Who Won the First World Cup?
-      </CustomText>
-      {/* <ScoreDisplay></ScoreDisplay> */}
-      {/* <Text
-        style={{
-          backgroundColor: COLORS.white,
-          color: COLORS.lightPurple,
-          width: 60,
-          marginLeft: 15,
-          marginTop: 10,
-          borderRadius: SIZES.medium,
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      >
-        Level 3
-      </Text> */}
-      {/* <Text
-        style={{
-          // backgroundColor: COLORS.white,
-          color: COLORS.white,
-          fontSize: 30,
-          // width: 60
-          marginLeft: 15,
-          marginTop: 20,
-          borderRadius: SIZES.medium,
-          justifyContent: "center",
-          marginBottom: 10,
-          // alignItems: "center",
-          // textAlign: "center",
-        }}
-      >
-        Recent Quiz
-      </Text> */}
-      {/* <View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
-        <QuizDisplay></QuizDisplay>
-        <QuizDisplay></QuizDisplay>
-      </View> */}
-      {/* <SubmitButton text={"Continue"} marginTop={20}></SubmitButton> */}
+
       <QuestionPageImage></QuestionPageImage>
-      <QuizOption></QuizOption>
-      <QuizOption></QuizOption>
-      <QuizOption></QuizOption>
-      <QuizOption></QuizOption>
+      {containOptions
+        ? question.options.map((option) => (
+            <QuizOption
+              score={score}
+              option={option}
+              correctOption={question.correctOption}
+              key={Math.random()}
+            ></QuizOption>
+          ))
+        : null}
+      <SubmitButton
+        onPressHandler={onPressHandler}
+        text={"Continue"}
+      ></SubmitButton>
     </Background>
   );
 }

@@ -60,9 +60,10 @@ export function RectButton({ imgUrl, handlePress, ...props }) {
   );
 }
 
-export function SubmitButton({ imgUrl, text, handlePress, ...props }) {
+export function SubmitButton({ imgUrl, text, onPressHandler, ...props }) {
   return (
     <TouchableOpacity
+      onPress={() => onPressHandler()}
       style={{
         margin: 15,
         marginTop: 40,
@@ -79,7 +80,6 @@ export function SubmitButton({ imgUrl, text, handlePress, ...props }) {
         flexDirection: "column",
         ...props,
       }}
-      onPress={handlePress}
     >
       <Text
         source={imgUrl}

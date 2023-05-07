@@ -1,12 +1,23 @@
 import React from "react";
 import { Image, TouchableOpacity, Dimensions, Text } from "react-native";
 import { assets, COLORS, SIZES } from "../constants";
+import { useNavigation } from "@react-navigation/native";
 
-export function QuizDisplay({ props }) {
+export function QuizDisplay({ children, imgUrl, subject, ...props }) {
+  const navigation = useNavigation();
+
+  // console.log(props.subject);
+
   return (
     <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("QuestionController", {
+          subjectData: subject,
+        });
+        // console.log(subject);
+      }}
       style={{
-        margin: 15,
+        margin: 10,
         // marginTop: 40,
         width: Dimensions.get("window").width / 2 - 30,
         height: Dimensions.get("window").width / 2 - 20,
@@ -25,11 +36,11 @@ export function QuizDisplay({ props }) {
       }}
     >
       <Image
-        source={assets.heart}
+        source={imgUrl}
         resizeMode="contain"
-        style={{ width: 100, height: 100 }}
+        style={{ width: 80, height: 80 }}
       ></Image>
-      <Text style={{ fontSize: 20 }}>Science</Text>
+      <Text style={{ fontSize: 20 }}>{children}</Text>
     </TouchableOpacity>
   );
 }

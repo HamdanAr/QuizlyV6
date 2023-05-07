@@ -17,7 +17,15 @@ export function ScoreDisplay() {
         flexDirection: "row",
       }}
     >
-      <Score imgUrl={assets.heart} category={"Rank"} score={"116/600"}></Score>
+      <View>
+        <Score
+          imgUrl={assets.crown}
+          category={"Rank"}
+          score={"116/600"}
+          width={10}
+        ></Score>
+      </View>
+
       <View
         style={{
           height: "50%",
@@ -27,7 +35,7 @@ export function ScoreDisplay() {
           //   marginBottom: 5,
         }}
       ></View>
-      <Score imgUrl={assets.heart} category={"Rank"} score={"116/600"}></Score>
+      <Score imgUrl={assets.coin} category={"Score"} score={"116/600"}></Score>
       {/* <Score imgUrl={assets.heart} category={"Rank"} score={"116/600"}></Score> */}
     </View>
   );

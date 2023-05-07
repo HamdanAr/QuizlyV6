@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, Dimensions, Image } from "react-native";
-import { SIZES } from "../constants";
+import { COLORS, SIZES, assets } from "../constants";
 
-export function Score({ imgUrl, category, score }) {
+export function Score({ imgUrl, category, score, ...props }) {
   return (
     <View
       style={{
@@ -18,7 +18,11 @@ export function Score({ imgUrl, category, score }) {
       }}
     >
       <View>
-        <Image source={imgUrl}></Image>
+        <Image
+          source={imgUrl}
+          resizeMode="contain"
+          style={{ width: 60, height: 60, backgroundColor: COLORS.white }}
+        ></Image>
       </View>
       <View style={{ marginLeft: 10 }}>
         <Text style={{ color: "black" }}>{category}</Text>

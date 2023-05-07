@@ -10,9 +10,13 @@ import {
 } from "../components";
 import { Background } from "../boilerplate";
 import { assets, COLORS, SIZES } from "../constants";
+import { useDispatch, useSelector } from "react-redux";
 
 export function Result() {
+  const score = useSelector((state) => state.score.value);
+  const dispatch = useDispatch();
   //   const windowWidth = Dimensions.get("window");
+
   return (
     <Background>
       <CircleButton imgUrl={assets.heart} right={10} top={10}></CircleButton>
@@ -41,7 +45,7 @@ export function Result() {
         // textAlign={"center"}
         fontSize={20}
       >
-        You Got 8 correct answers
+        You Got {score} correct answers
       </CustomText>
       {/* <CustomText
         color={COLORS.white}

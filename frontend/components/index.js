@@ -5,6 +5,7 @@ import { ScoreDisplay } from "./ScoreDisplay";
 import { QuizDisplay } from "./QuizDisplay";
 import { QuestionPageImage } from "./QuestionPageImage";
 import { QuizOption } from "./QuizOption";
+import { QuestionController } from "../screens/QuestionController";
 
 export {
   CircleButton,
@@ -16,4 +17,5 @@ export {
   QuizDisplay,
   QuestionPageImage,
   QuizOption,
+  QuestionController,
 };

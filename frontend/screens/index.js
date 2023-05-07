@@ -4,5 +4,14 @@ import { SignUp } from "./SignUp";
 import { QuizCategory } from "./QuizCategory";
 import { QuestionPage } from "./QuestionPage";
 import { Result } from "./Result";
+import { QuestionController } from "./QuestionController";
 
-export { Home, Login, SignUp, QuizCategory, QuestionPage, Result };
+export {
+  Home,
+  Login,
+  SignUp,
+  QuizCategory,
+  QuestionPage,
+  Result,
+  QuestionController,
+};
