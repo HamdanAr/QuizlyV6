@@ -5,6 +5,7 @@ import { QuizCategory } from "./QuizCategory";
 import { QuestionPage } from "./QuestionPage";
 import { Result } from "./Result";
 import { QuestionController } from "./QuestionController";
+import { VedioRecord } from "./VedioRecord";
 
 export {
   Home,
@@ -14,4 +15,5 @@ export {
   QuestionPage,
   Result,
   QuestionController,
+  VedioRecord,
 };

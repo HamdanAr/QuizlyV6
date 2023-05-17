@@ -6,6 +6,7 @@ import {
   QuizCategory,
   QuestionPage,
   Result,
+  VedioRecord,
 } from "./screens";
 // import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
@@ -46,11 +47,12 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="VedioRecord">
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="QuizCategory" component={QuizCategory} />
           <Stack.Screen name="QuestionPage" component={QuestionPage} />
           <Stack.Screen name="Result" component={Result} />
+          <Stack.Screen name="VedioRecord" component={VedioRecord} />
           <Stack.Screen
             name="QuestionController"
             component={QuestionController}

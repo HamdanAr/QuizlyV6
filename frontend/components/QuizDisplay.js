@@ -5,6 +5,11 @@ import { useNavigation } from "@react-navigation/native";
 
 export function QuizDisplay({ children, imgUrl, subject, ...props }) {
   const navigation = useNavigation();
+  if (subject.subjectName == "Science") {
+    imgUrl = assets.science;
+  } else {
+    imgUrl = assets.sport;
+  }
 
   // console.log(props.subject);
 
@@ -40,7 +45,7 @@ export function QuizDisplay({ children, imgUrl, subject, ...props }) {
         resizeMode="contain"
         style={{ width: 80, height: 80 }}
       ></Image>
-      <Text style={{ fontSize: 20 }}>{children}</Text>
+      <Text style={{ fontSize: 20 }}>{subject.subjectName}</Text>
     </TouchableOpacity>
   );
 }

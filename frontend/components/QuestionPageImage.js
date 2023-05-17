@@ -5,7 +5,7 @@ import { assets } from "../constants";
 export function QuestionPageImage() {
   return (
     <Image
-      source={assets.heart}
+      source={assets.cricket}
       resizeMode="contain"
       style={{
         // backgroundColor: "black",

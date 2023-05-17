@@ -28,8 +28,11 @@ export function Home() {
   const subjects = useSelector((state) => state.subject.value);
   const dispatch = useDispatch();
 
+  // http://172.23.0.1:3000/subjects
+  // https://quizly-386119.as.r.appspot.com
+
   const fetchSubjects = async () => {
-    await fetch("http://172.23.0.1:3000/subjects")
+    await fetch("https://quizly-386119.as.r.appspot.com/subjects")
       .then((response) => response.json())
       .then((subjects) =>
         subjects.map((subject) => dispatch(addSubject(subject)))
@@ -45,8 +48,8 @@ export function Home() {
 
   return (
     <Background>
-      <CircleButton imgUrl={assets.heart} right={10} top={10}></CircleButton>
-      <CircleButton imgUrl={assets.heart} left={10} top={10}></CircleButton>
+      <CircleButton imgUrl={assets.profile} right={10} top={10}></CircleButton>
+      <CircleButton imgUrl={assets.hum} left={10} top={10}></CircleButton>
       <CustomText
         color={COLORS.white}
         fontSize={SIZES.medium}

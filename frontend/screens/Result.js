@@ -11,16 +11,22 @@ import {
 import { Background } from "../boilerplate";
 import { assets, COLORS, SIZES } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 export function Result() {
+  const navigation = useNavigation();
   const score = useSelector((state) => state.score.value);
   const dispatch = useDispatch();
   //   const windowWidth = Dimensions.get("window");
 
+  const onPressHandler = () => {
+    navigation.navigate("Home");
+  };
+
   return (
     <Background>
-      <CircleButton imgUrl={assets.heart} right={10} top={10}></CircleButton>
-      <CircleButton imgUrl={assets.heart} left={10} top={10}></CircleButton>
+      <CircleButton imgUrl={assets.profile} right={10} top={10}></CircleButton>
+      <CircleButton imgUrl={assets.hum} left={10} top={10}></CircleButton>
       <CustomText
         color={COLORS.white}
         // fontSize={SIZES.medium}
@@ -95,6 +101,11 @@ export function Result() {
       </View> */}
       {/* <SubmitButton text={"Continue"} marginTop={20}></SubmitButton> */}
       {/* <Text>You </Text> */}
+      <SubmitButton
+        text={"Back To Home"}
+        marginTop={40}
+        onPressHandler={onPressHandler}
+      ></SubmitButton>
     </Background>
   );
 }

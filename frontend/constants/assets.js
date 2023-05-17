@@ -7,6 +7,9 @@ import crown from "../assets/icons/crown.jpeg";
 import coin from "../assets/icons/coin.jpeg";
 import sport from "../assets/icons/sport.jpeg";
 import science from "../assets/icons/science.jpeg";
+import hum from "../assets/icons/humberger.jpeg";
+import profile from "../assets/icons/profile.jpeg";
+import cricket from "../assets/icons/cricket.jpeg";
 
 import logo from "../assets/images/logo.png";
 import nft01 from "../assets/images/nft01.png";
@@ -32,6 +35,9 @@ export default {
   coin,
   sport,
   science,
+  hum,
+  profile,
+  cricket,
 
   logo,
   nft01,
