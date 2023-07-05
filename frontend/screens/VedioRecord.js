@@ -12,13 +12,13 @@ import {
   Button,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
+import FormData from "form-data";
 import { shareAsync } from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
 import { COLORS } from "../constants";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
-export function VedioRecord() {
+export function VedioRecord({ optionHandler, question }) {
   let cameraRef = useRef(null);
   const [photoUri, setPhotoUri] = useState(null);
   const [hasPermission, setHasPermission] = useState();
@@ -58,16 +58,34 @@ export function VedioRecord() {
       });
     };
 
-    let savePhoto = () => {
+    let savePhoto = async () => {
       // MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
       //   setPhoto(undefined);
       // });
-      fetchPrediction();
+      console.log("I am hit");
+      await fetchPrediction();
     };
 
     const fetchPrediction = async () => {
+      const formData = new FormData();
+      formData.append("image", {
+        uri: photo.uri,
+        type: "image/jpeg", // Adjust the type based on your image format
+        name: "image.jpg", // Provide a name for the image
+      });
+
       console.log("I am hit");
-      await fetch("http://10.7.89.97:5000/").catch((err) => console.log(err));
+      await fetch("http://192.168.43.7:5000/", {
+        method: "POST",
+        headers: { "Content-Type": "multipart/form-data" },
+        body: formData,
+      })
+        .then((response) => response.text())
+        .then((result) => {
+          console.log(result);
+          optionHandler(result);
+        })
+        .catch((err) => console.log(err));
       // .then((response) => response.json())
       // .then((subjects) =>
       //   subjects.map((subject) => dispatch(addSubject(subject)))
@@ -84,6 +102,7 @@ export function VedioRecord() {
           width: 100,
           height: 100,
           borderRadius: 10,
+          zIndex: 1,
         }}
       >
         <Image
@@ -94,31 +113,37 @@ export function VedioRecord() {
           <TouchableOpacity
             title="Save"
             onPress={savePhoto}
-            // style={{ backgroundColor: COLORS.darkPurple }}
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+            }}
           >
             <Text
               style={{
                 fontSize: 10,
-                color: "black",
+                color: "white",
                 justifyContent: "center",
                 textAlign: "center",
                 alignItems: "center",
-                marginTop: 0,
               }}
             >
-              Save
+              Predict
             </Text>
           </TouchableOpacity>
         ) : undefined}
         <TouchableOpacity
           title="Discard"
           onPress={() => setPhoto(undefined)}
-          // style={{ backgroundColor: COLORS.darkPurple }}
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+          }}
         >
           <Text
             style={{
               fontSize: 10,
-              marginTop: 0,
               color: "white",
               justifyContent: "center",
               textAlign: "center",

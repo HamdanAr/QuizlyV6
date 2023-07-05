@@ -47,7 +47,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="VedioRecord">
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="QuizCategory" component={QuizCategory} />
           <Stack.Screen name="QuestionPage" component={QuestionPage} />

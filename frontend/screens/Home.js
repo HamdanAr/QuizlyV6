@@ -46,6 +46,10 @@ export function Home() {
 
   console.log(typeof subjects);
 
+  const onPressHandler = () => {
+    // console.log("Clicked");
+  };
+
   return (
     <Background>
       <CircleButton imgUrl={assets.profile} right={10} top={10}></CircleButton>
@@ -115,7 +119,11 @@ export function Home() {
         ))}
         {/* <QuizDisplay imgUrl={assets.heart}>Sport</QuizDisplay> */}
       </View>
-      <SubmitButton text={"Continue"} marginTop={20}></SubmitButton>
+      <SubmitButton
+        text={"Continue"}
+        onPressHandler={onPressHandler}
+        marginTop={20}
+      ></SubmitButton>
     </Background>
     // </SafeAreaView>
   );

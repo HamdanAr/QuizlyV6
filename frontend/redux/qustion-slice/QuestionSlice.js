@@ -22,9 +22,12 @@ export const QuestionSlice = createSlice({
     //   removeUserById: (state, action) => {
     //     state.value += action.payload
     //   },
+    removeQuestion: (state, action) => {
+      state.value.pop();
+    },
   },
 });
 
-export const { addQuestion } = QuestionSlice.actions;
+export const { addQuestion, removeQuestion } = QuestionSlice.actions;
 
 export default QuestionSlice.reducer;

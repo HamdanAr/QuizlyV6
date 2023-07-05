@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Text,
@@ -30,8 +30,23 @@ export function QuestionPage({ question, index, onNextHandler }) {
   const navigation = useNavigation();
   const score = useSelector((state) => state.score.value);
   const dispatch = useDispatch();
+  const [correctOption, setCorrectOption] = useState("");
+  const [ref, setRef] = useState(useRef());
+  // const aOptionRef = useRef();
+  // const bOptionRef = useRef();
+  // const cOptionRef = useRef();
+  // const dOptionRef = useRef();
 
-  console.log(question);
+  // aOptionRef.current == "A";
+  // bOptionRef.current == "B";
+  // cOptionRef.current == "C";
+  // dOptionRef.current == "D";
+
+  const recievedOptionHandler = (option) => {
+    setCorrectOption(option);
+  };
+
+  const saveHandler = () => {};
 
   var containOptions = false;
   const onPressHandler = () => {
@@ -47,12 +62,31 @@ export function QuestionPage({ question, index, onNextHandler }) {
   if (question.options != null) {
     containOptions = true;
   }
+  // let buttonRef;
+  // if (correctOption == "A") {
+  //   buttonRef = aOptionRef;
+  // } else if (correctOption == "B") {
+  //   buttonRef = bOptionRef;
+  // } else if (correctOption == "C") {
+  //   buttonRef = cOptionRef;
+  // } else {
+  //   buttonRef = dOptionRef;
+  // }
+
+  console.log("The correct option is " + correctOption);
+
+  let counter = 1;
+
   return (
     <Background>
       {/* <CircleButton imgUrl={assets.heart} right={10} top={10}></CircleButton> */}
-      <View>
+      {/* <View style={{ backgroundColor: "white" }}>
         <VedioRecord></VedioRecord>
-      </View>
+      </View> */}
+      <VedioRecord
+        optionHandler={recievedOptionHandler}
+        question={question}
+      ></VedioRecord>
       <CircleButton imgUrl={assets.hum} left={10} top={10}></CircleButton>
       <CustomText
         color={COLORS.gray}
@@ -69,12 +103,14 @@ export function QuestionPage({ question, index, onNextHandler }) {
 
       <QuestionPageImage></QuestionPageImage>
       {containOptions
-        ? question.options.map((option) => (
+        ? question.options.map((option, index) => (
             <QuizOption
               score={score}
               option={option}
               correctOption={question.correctOption}
-              key={Math.random()}
+              key={index}
+              optionStr={correctOption}
+              index={index}
             ></QuizOption>
           ))
         : null}
